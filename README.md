@@ -1,9 +1,6 @@
 # Efik-OmniVoice-TTS
 
-![Efik speaker using a phone](docs/figures/efik_speaker.png)
-<p align="center">
-  <img width="400" src="docs/figures/efik_speaker.png" alt="Efik speaker using a phone" />
-</p>
+![Training and evaluation loss for Efik OmniVoice fine-tuning](docs/figures/training_loss_efik.png)
 
 Fine-tuning [OmniVoice](https://github.com/k2-fsa/OmniVoice) on 8.79 hours of Efik speech for low-resource tonal TTS.
 
@@ -53,7 +50,7 @@ This script downloads the Efik dataset, splits it 90/10, saves the audio files l
 ```bash
 python src/prepare_efik_data.py
 ```
-**It reads configs/efik_data_config.json and produces:**
+It reads configs/efik_data_config.json and produces:
 - data/raw_audio/efi/ (5,875 .wav files)
 - data/efik_train.jsonl (5,287 samples)
 - data/efik_dev.jsonl (588 samples)
@@ -63,12 +60,12 @@ This script converts the raw audio into discrete tokens using the OmniVoice toke
 ```bash
 python src/tokenize_efik.py
 ```
-**It reads configs/efik_tokenize_config.json and produces:**
+It reads configs/efik_tokenize_config.json and produces:
 - data/finetune/tokens/efi/train/ (audios and txts shards)
 - data/finetune/tokens/efi/dev/ (audios and txts shards)
 
 ## Fine-tuning
-**This is the command used to fine-tune OmniVoice on Efik.**
+This is the command used to fine-tune OmniVoice on Efik.
 ```bash
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 nohup accelerate launch \
@@ -91,8 +88,8 @@ tail -f training_efik.log
 | :--- | :--- |
 | **Base model** | `k2-fsa/OmniVoice` |
 | **Steps** | 5,000 |
-| **Batch tokens** | 2,048 |
-| **Gradient accumulation** | 4 |
+| **Batch tokens** | 4096 |
+| **Gradient accumulation** | 2 |
 | **Learning rate** | 1e-5 |
 | **Mixed precision** | bf16 |
 | **Hardware** | 1 GPU (22 GB) |
@@ -101,8 +98,6 @@ tail -f training_efik.log
 
 
 ## Results
-https://offiongbassey.github.io/efik-/pics/training_loss_efik.png
-
 The loss curve shows the model learned quickly in the first 500 steps, then plateaued. Eval loss dropped from 4.07 to 3.81, indicating generalization to the dev set. The noise in the eval curve after step 2,000 suggests the model reached its capacity limit for this dataset size.
 
 ### The tonal finding 
