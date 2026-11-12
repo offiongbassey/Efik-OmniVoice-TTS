@@ -98,14 +98,14 @@ tail -f training_efik.log
 
 
 ## Results
-The loss curve shows the model learned quickly in the first 500 steps, then plateaued. Eval loss dropped from 4.07 to 3.81, indicating generalization to the dev set. The noise in the eval curve after step 2,000 suggests the model reached its capacity limit for this dataset size.
+The loss curve shows the model learned quickly in the first 500 steps, then plateaued. Eval loss dropped from 4.07 to 3.81, indicating generalization to the dev set. The noise in the eval curve after step 2,000 suggests that the training appears to have plateaued under the current data and configuration. 
 
 ### The tonal finding 
 The fine-tuned model produces intelligible Efik speech. However, it fails to preserve lexical tone.
 
 A clear example is the word akpa. In the sentence "Mme mmọ emi ekenyenede udọñ ye ifet ndikot akpa edimiñ ñwed mbuk Mutanda Oyom Namondo", akpa means "first" (the first version of the book). But the model pronounces it as akpa meaning "cost" (as in "it cost me 500 naira"). The tonal contrast that distinguishes these meanings is lost.
 
-This is the codec bottleneck. The discrete audio tokens produced by OmniVoice's neural codec discard the fine-grained pitch information required for lexical tone. 
+This is the codec bottleneck. The discrete audio tokens produced by OmniVoice's neural codec probably discard the fine-grained pitch information required for lexical tone. 
 
 ## Inference
 To generate a sample from the fine-tuned checkpoint:
