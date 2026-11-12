@@ -1,0 +1,9 @@
+{
+    "dataset_name": "offiongbassey/efik_speech_dataset",
+    "language_id": "efi",
+    "test_size": 0.1,
+    "seed": 42,
+    "output_audio_dir": "data/raw_audio/efi",
+    "output_train_manifest": "data/efik_train.jsonl",
+    "output_dev_manifest": "data/efik_dev.jsonl"
+}

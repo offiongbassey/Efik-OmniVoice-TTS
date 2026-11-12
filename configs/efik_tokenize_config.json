@@ -1,0 +1,9 @@
+{
+    "train_manifest": "data/efik_train.jsonl",
+    "dev_manifest": "data/efik_dev.jsonl",
+    "tokenizer_path": "eustlb/higgs-audio-v2-tokenizer",
+    "nj_per_gpu": 1,
+    "min_length": 0.5,
+    "max_length": 30,
+    "output_token_dir": "data/finetune/tokens/efi"
+}
